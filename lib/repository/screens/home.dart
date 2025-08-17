@@ -22,6 +22,8 @@ class HomeScreen extends StatelessWidget {
     {"img": "image 44 (1).png", "text": "Dairy, Bread "},
     {"img": "image 45 (1).png", "text": "Biscuits"}
   ];
+
+  HomeScreen({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(

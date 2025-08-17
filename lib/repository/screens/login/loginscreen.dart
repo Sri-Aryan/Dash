@@ -1,4 +1,5 @@
 import 'package:dash/repository/screens/bottomnavigation.dart';
+import 'package:dash/repository/screens/emailauth.dart';
 import 'package:flutter/material.dart';
 
 import '../../widgets/uihelper.dart';
@@ -68,7 +69,14 @@ class LoginScreen extends StatelessWidget {
                       ),
                     ),
                     SizedBox(height: 15,),
-                    UiHelper.CustomText(text: "or login with Email", color: Colors.deepOrange, fontweight: FontWeight.normal, fontsize: 14)
+                    InkWell(
+                      onTap: (){
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=> EmailAuth()),
+                        );
+                      },
+                    child: Text("Login with email",style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold),),
+                    )
+
                   ],
                 ),
               ),

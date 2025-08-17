@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "335923557889",
+    "project_id": "login-b2c59",
+    "storage_bucket": "login-b2c59.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:335923557889:android:d3fdf3c2e80799da8b3200",
+        "android_client_info": {
+          "package_name": "com.example.dash"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": ""
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
