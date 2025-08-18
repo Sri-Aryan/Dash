@@ -1,4 +1,3 @@
-import 'package:dash/domain/constants/appcolors.dart';
 import 'package:dash/repository/widgets/uihelper.dart';
 import 'package:flutter/material.dart';
 
@@ -68,72 +67,82 @@ class _HomeScreenState extends State<CartScreen> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(height: 50),
+          SizedBox(height: 40),
           Stack(
             children: [
               Container(
-                height: 160,
+                height: 190,
                 width: double.infinity,
-                color: AppColors.scaffoldbackground,
+                color: Colors.deepOrange,
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SizedBox(height: 10),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 15),
-                      child: UiHelper.CustomText(
-                        text: "Dash",
-                        color: Color(0X0ff00000),
-                        fontweight: FontWeight.bold,
-                        fontsize: 14,
-                        fontfamily: "bold",
-                      ),
+                    SizedBox(
+                      height: 30,
                     ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 15),
-                      child: UiHelper.CustomText(
-                        text: "15 minutes",
-                        color: Color(0XFF000000),
-                        fontweight: FontWeight.bold,
-                        fontsize: 22,
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 15),
-                      child: Row(
-                        children: [
-                          UiHelper.CustomText(
-                            text: "Home - ",
+                    Row(
+                      children: [
+                        SizedBox(
+                          width: 20,
+                        ),
+                        UiHelper.CustomText(
+                            text: "Dash",
                             color: Color(0XFF000000),
                             fontweight: FontWeight.bold,
-                            fontsize: 14,
-                          ),
-                          UiHelper.CustomText(
-                            text: "Uttar Pradesh, India",
+                            fontsize: 15,
+                            fontfamily: "bold"),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        SizedBox(
+                          width: 20,
+                        ),
+                        UiHelper.CustomText(
+                            text: "15 minutes",
                             color: Color(0XFF000000),
                             fontweight: FontWeight.bold,
-                            fontsize: 14,
-                          ),
-                        ],
-                      ),
+                            fontsize: 20,
+                            fontfamily: "bold")
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        SizedBox(
+                          width: 20,
+                        ),
+                        UiHelper.CustomText(
+                            text: "HOME ",
+                            color: Color(0XFF000000),
+                            fontweight: FontWeight.bold,
+                            fontsize: 14),
+                        UiHelper.CustomText(
+                            text: "- Uttar Pradesh,India",
+                            color: Color(0XFF000000),
+                            fontweight: FontWeight.bold,
+                            fontsize: 14)
+                      ],
                     ),
                   ],
                 ),
               ),
               Positioned(
                 right: 20,
-                bottom: 60,
+                bottom: 100,
                 child: CircleAvatar(
-                  radius: 20,
+                  radius: 15,
                   backgroundColor: Colors.white,
-                  child: Icon(Icons.person, color: Colors.black, size: 15),
+                  child: Icon(
+                    Icons.person,
+                    color: Colors.black,
+                    size: 20,
+                  ),
                 ),
               ),
               Positioned(
-                bottom: 20,
-                left: 30,
-                child: UiHelper.CustomTextField(controller: searchController),
-              ),
+                  bottom: 30,
+                  left: 20,
+                  child:
+                  UiHelper.CustomTextField(controller: searchController))
             ],
           ),
           SizedBox(height: 20),

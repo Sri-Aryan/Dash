@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../widgets/uihelper.dart';
 
+@immutable
 class CategoryScreen extends StatelessWidget {
   TextEditingController searchController = TextEditingController();
   var grocerykitchen = [
@@ -48,7 +49,7 @@ class CategoryScreen extends StatelessWidget {
               Container(
                 height: 190,
                 width: double.infinity,
-                color: Color(0XFFF7CB45),
+                color: Colors.deepOrange,
                 child: Column(
                   children: [
                     SizedBox(
@@ -91,7 +92,7 @@ class CategoryScreen extends StatelessWidget {
                             fontweight: FontWeight.bold,
                             fontsize: 14),
                         UiHelper.CustomText(
-                            text: "- Uttar pradesh",
+                            text: "- Uttar Pradesh,India",
                             color: Color(0XFF000000),
                             fontweight: FontWeight.bold,
                             fontsize: 14)
