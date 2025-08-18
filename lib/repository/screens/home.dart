@@ -14,6 +14,7 @@ class HomeScreen extends StatelessWidget {
     {"img": "image 54.png", "text": "Golden Glass"},
     {"img": "image 57.png", "text": "Royal Gulab Jamun"},
     {"img": "image 63.png", "text": "Golden Glass"},
+    {"img": "image 32.png", "text": "Sweets"},
   ];
   var grocerykitchen = [
     {"img": "image 41.png", "text": "Vegetables"},
@@ -24,7 +25,7 @@ class HomeScreen extends StatelessWidget {
   ];
 
   HomeScreen({super.key});
-  @override
+  @override 
   Widget build(BuildContext context) {
     return Scaffold(
         body: Column(
@@ -37,7 +38,7 @@ class HomeScreen extends StatelessWidget {
                 Container(
                   height: 190,
                   width: double.infinity,
-                  color: Color(0XFFEC0505),
+                  color: Colors.deepOrange,
                   child: Column(
                     children: [
                       SizedBox(
@@ -80,7 +81,7 @@ class HomeScreen extends StatelessWidget {
                               fontweight: FontWeight.bold,
                               fontsize: 14),
                           UiHelper.CustomText(
-                              text: "Uttar Pradesh, India",
+                              text: "- Uttar Pradesh, India",
                               color: Color(0XFFFFFFFF),
                               fontweight: FontWeight.bold,
                               fontsize: 14)
@@ -116,7 +117,7 @@ class HomeScreen extends StatelessWidget {
             Container(
               height: 216,
               width: double.maxFinite,
-              color: Color(0XFFEC0505),
+              color: Colors.deepOrange,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -226,6 +227,7 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
             ),
+
             Row(
               children: [
                 SizedBox(

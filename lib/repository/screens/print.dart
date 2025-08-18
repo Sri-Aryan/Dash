@@ -1,3 +1,4 @@
+import 'package:dash/repository/features/postpage.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/uihelper.dart';
@@ -9,7 +10,6 @@ class PrintScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Color(0XFFFBF0CE),
         body: Column(
           children: [
             SizedBox(height: 40,),
@@ -18,7 +18,7 @@ class PrintScreen extends StatelessWidget {
                 Container(
                   height: 190,
                   width: double.infinity,
-                  color: Color(0XFFF7CB45),
+                  color: Colors.deepOrange,
                   child: Column(
                     children: [
                       SizedBox(
@@ -56,7 +56,7 @@ class PrintScreen extends StatelessWidget {
                             width: 20,
                           ),
                           UiHelper.CustomText(
-                              text: "HOME ",
+                              text: "HOME - ",
                               color: Color(0XFF000000),
                               fontweight: FontWeight.bold,
                               fontsize: 14),
@@ -210,10 +210,22 @@ class PrintScreen extends StatelessWidget {
                 ),
               ),
               Positioned(
-                child: UiHelper.CustomImage(img: "document.png"),
                 right: 20,
-                bottom: 40,
-              )
+                bottom: 30,
+                child: GestureDetector(
+                  onTap: () {
+                    // Navigate to SecondScreen on click
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const PostPage()),
+                    );
+                  },
+                  child: Image.asset(
+                    "assets/images/document.png",
+                    width: 150,
+                    height: 150,
+                  ),
+                ),)
             ])
           ],
         ));
