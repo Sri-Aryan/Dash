@@ -6,13 +6,13 @@ A Flutter application for managing delivery services with **Firebase Authenticat
 
 ## 📸 Screenshots
 
-| Splash Screen | Login Screen | Posts Page |
-|---------------|--------------|------------|
 <img width="1080" height="2400" alt="Screenshot_1" src="https://github.com/user-attachments/assets/1b997fcc-9e34-4070-901b-bc1f06b004c3" />
 
 <img width="1080" height="2400" alt="Screenshot_2" src="https://github.com/user-attachments/assets/c6f173f6-ccbb-4546-aa44-7c87ce1eab9c" />
 
 <img width="1080" height="2400" alt="Screenshot_3" src="https://github.com/user-attachments/assets/3c1b8eb6-005e-4b41-b0d9-7ac47758ada6" />
+
+<img width="250"  alt="Screenshot_20250819_040702" src="https://github.com/user-attachments/assets/5d2b12d9-d07a-4ef5-8a22-64041abad560" />
 
 ---
 ## 📱 Features
@@ -43,4 +43,5 @@ A Flutter application for managing delivery services with **Firebase Authenticat
 ```bash
 git clone https://github.com/your-username/dash_delivery_app.git
 cd dash_delivery_app
+
 
