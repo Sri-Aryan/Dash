@@ -14,7 +14,7 @@ class _PostPageState extends State<PostPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Scaffold(  
       appBar: AppBar(
         title: const Text("User Directory"),
         backgroundColor: Colors.deepOrange,
