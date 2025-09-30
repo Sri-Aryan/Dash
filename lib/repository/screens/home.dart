@@ -62,6 +62,8 @@ class _HomeScreenState extends State<HomeScreen> {
           (sum, item) =>
       sum + ((item['quantity'] as int) * (item['price'] as int)));
 
+  int currentIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -282,37 +284,59 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ],
       ),
-        bottomNavigationBar: BlocBuilder<CartBloc,CartState>(
-            builder: (context, state) {
-              if(state.totalCost==0) return SizedBox.shrink();
-              final totalItems = state.cart.values.fold<int>(
-                0,
-                    (sum, item) => sum + (item['quantity'] as int),
-              );
+      bottomNavigationBar: BlocBuilder<CartBloc, CartState>(
+        builder: (context, state) {
+          final totalItems = state.cart.values.fold<int>(
+            0,
+                (sum, item) => sum + (item['quantity'] as int),
+          );
 
-              final totalCost = state.cart.values.fold<int>(
-                0,
-                    (sum, item) => sum + ((item['quantity'] as int) * (item['price'] as int)),
-              );
-              return InkWell(
-                onTap: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (_)=> OrderDetailsScreen(cart: state.cart)),
-                );
-              },
-                child: Container(
-                  color: Colors.deepOrange,
-                  padding: EdgeInsets.all(16),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text("$totalItems items | ₹$totalCost",
-                          style: TextStyle(color: Colors.white, fontSize: 16)),
-                      Text("View Order", style: TextStyle(color: Colors.white,fontSize: 16, fontWeight: FontWeight.bold))
-                    ],
+          final totalCost = state.cart.values.fold<int>(
+            0,
+                (sum, item) => sum + ((item['quantity'] as int) * (item['price'] as int)),
+          );
+
+          return Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              // Your existing cart bar (only show when items present)
+              if (state.totalCost != 0)
+                InkWell(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => OrderDetailsScreen(cart: state.cart),
+                      ),
+                    );
+                  },
+                  child: Container(
+                    // color: Colors.deepOrange,
+                    // padding: EdgeInsets.all(16),
+                    // child: Row(
+                    //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    //   children: [
+                    //     Text(
+                    //       "$totalItems items | ₹$totalCost",
+                    //       style: TextStyle(color: Colors.white, fontSize: 16),
+                    //     ),
+                    //     Text(
+                    //       "View Order",
+                    //       style: TextStyle(
+                    //         color: Colors.white,
+                    //         fontSize: 16,
+                    //         fontWeight: FontWeight.bold,
+                    //       ),
+                    //     )
+                    //   ],
+                    // ),
                   ),
                 ),
-              );
-            }),
-      );
+            ],
+          );
+        },
+      ),
+
+    );
   }
 }

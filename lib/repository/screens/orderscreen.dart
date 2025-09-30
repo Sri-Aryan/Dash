@@ -37,7 +37,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
     final theme = Theme.of(context);
 
     return Scaffold(
-      backgroundColor: theme.colorScheme.surface,
+      backgroundColor: Colors.white,
       appBar: AppBar(
         elevation: 0,
         backgroundColor: theme.colorScheme.surface,
@@ -87,7 +87,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
           Icon(
             Icons.shopping_cart_outlined,
             size: 80,
-            color: Theme.of(context).colorScheme.outline,
+            color: Colors.deepOrange,
           ),
           const SizedBox(height: 16),
           Text(
@@ -127,7 +127,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
               width: 60,
               height: 60,
               decoration: BoxDecoration(
-                color: theme.colorScheme.primaryContainer,
+                color: Colors.deepOrange,
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Icon(
@@ -155,7 +155,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                   Text(
                     "₹${item['price']}",
                     style: theme.textTheme.bodyLarge?.copyWith(
-                      color: theme.colorScheme.primary,
+                      color: Colors.deepOrange,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
@@ -233,7 +233,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
           child: Icon(
             icon,
             size: 18,
-            color: theme.colorScheme.primary,
+            color: Colors.deepOrange,
           ),
         ),
       ),
@@ -297,7 +297,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                         Text(
                           "Free",
                           style: theme.textTheme.bodyMedium?.copyWith(
-                            color: theme.colorScheme.primary,
+                            color:Colors.deepOrange,
                             fontWeight: FontWeight.w500,
                           ),
                         ),
@@ -317,7 +317,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                           "₹$totalCost",
                           style: theme.textTheme.titleLarge?.copyWith(
                             fontWeight: FontWeight.w700,
-                            color: theme.colorScheme.primary,
+                            color:Colors.black,
                           ),
                         ),
                       ],
@@ -335,7 +335,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                     context.read<CartBloc>().add(ClearCartEvent());
                     Navigator.pushReplacement(
                       context,
-                      MaterialPageRoute(builder: (_) => HomeScreen()),
+                      MaterialPageRoute(builder: (_) => ConfirmScreen()),
                     );
                   },
                   style: FilledButton.styleFrom(
@@ -343,6 +343,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12),
                     ),
+                    backgroundColor: Colors.deepOrange
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,

@@ -1,3 +1,4 @@
+import 'package:dash/repository/screens/home.dart';
 import 'package:flutter/material.dart';
 
 class ConfirmScreen extends StatefulWidget {
@@ -55,7 +56,7 @@ class _ConfirmScreenState extends State<ConfirmScreen>
   }
 
   void _startAutoNavigation() {
-    Future.delayed(const Duration(seconds: 4), () {
+    Future.delayed(const Duration(seconds: 115), () {
       if (mounted) {
         _navigateToHome();
       }
@@ -63,10 +64,11 @@ class _ConfirmScreenState extends State<ConfirmScreen>
   }
 
   void _navigateToHome() {
-    Navigator.of(context).popUntil((route) => route.isFirst);
+    Navigator.pushAndRemoveUntil(context,
+        MaterialPageRoute(builder: (context)=> HomeScreen()), (route)=> false);
   }
 
-  @override
+   @override
   void dispose() {
     _scaleController.dispose();
     _fadeController.dispose();
@@ -79,7 +81,6 @@ class _ConfirmScreenState extends State<ConfirmScreen>
     final size = MediaQuery.of(context).size;
 
     return Scaffold(
-      backgroundColor: theme.colorScheme.surface,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(24.0),
@@ -114,7 +115,7 @@ class _ConfirmScreenState extends State<ConfirmScreen>
                             width: 120,
                             height: 120,
                             decoration: BoxDecoration(
-                              color: theme.colorScheme.primaryContainer,
+                              color: Colors.deepOrangeAccent,
                               shape: BoxShape.circle,
                               boxShadow: [
                                 BoxShadow(
@@ -127,7 +128,7 @@ class _ConfirmScreenState extends State<ConfirmScreen>
                             child: Icon(
                               Icons.check_circle,
                               size: 64,
-                              color: theme.colorScheme.primary,
+                              color: Colors.white,
                             ),
                           ),
                         );
@@ -173,7 +174,7 @@ class _ConfirmScreenState extends State<ConfirmScreen>
                         width: double.infinity,
                         padding: const EdgeInsets.all(20),
                         decoration: BoxDecoration(
-                          color: theme.colorScheme.surfaceVariant.withOpacity(0.5),
+                          color: Colors.deepOrange[100],
                           borderRadius: BorderRadius.circular(16),
                           border: Border.all(
                             color: theme.colorScheme.outline.withOpacity(0.2),
@@ -227,6 +228,7 @@ class _ConfirmScreenState extends State<ConfirmScreen>
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(12),
                           ),
+                          backgroundColor: Colors.deepOrange
                         ),
                         icon: const Icon(Icons.track_changes, size: 20),
                         label: Text(
