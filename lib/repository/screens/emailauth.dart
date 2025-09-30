@@ -1,11 +1,12 @@
 import 'package:dash/repository/screens/bottomnavigation.dart';
 import 'package:dash/repository/screens/register.dart';
 import 'package:dash/repository/widgets/uihelper.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class EmailAuth extends StatefulWidget {
+  const EmailAuth({super.key});
+
   @override
   State<EmailAuth> createState() => _EmailAuthState();
 }

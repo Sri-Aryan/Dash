@@ -1,8 +1,12 @@
+import 'package:dash/repository/cart/cart_bloc.dart';
+// import 'package:dash/repository/cart/cart_event.dart';
+// import 'package:dash/repository/cart/cart_state.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../widgets/uihelper.dart';
 
 class HomeScreen extends StatefulWidget {
-  HomeScreen({super.key});
+  const HomeScreen({super.key});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -192,7 +196,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 itemBuilder: (context, index) {
                   final item = categroy[index];
                   return GestureDetector(
-                    onTap: () => addToCart(item),
+                    onTap: () => context.read<CartBloc>().add(AddToCartEvent(item["text"].toString(), item['price'] as int)),
                     child: Column(
                       children: [
                         Padding(
@@ -258,7 +262,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
                               color: Color(0XFFD9EBEB)),
-                          child: UiHelper.CustomImage(
+                              child: UiHelper.CustomImage(
                               img: grocerykitchen[index]["img"].toString()),
                         ),
                       ),
@@ -277,40 +281,44 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ],
       ),
-      bottomNavigationBar: totalItems > 0
-          ? InkWell(
-        onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (_) => OrderDetailsScreen(cart: cart)),
-          );
-        },
-        child: Container(
-          color: Colors.deepOrange,
-          padding: EdgeInsets.all(16),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text("$totalItems items | ₹$totalCost",
-                  style: TextStyle(color: Colors.white, fontSize: 16)),
-              Text("View Order",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold)),
-            ],
-          ),
-        ),
-      )
-          : SizedBox.shrink(),
-    );
+        bottomNavigationBar: BlocBuilder<CartBloc,CartState>(
+            builder: (context, state) {
+              if(state.totalCost==0) return SizedBox.shrink();
+              final totalItems = state.cart.values.fold<int>(
+                0,
+                    (sum, item) => sum + (item['quantity'] as int),
+              );
+
+              final totalCost = state.cart.values.fold<int>(
+                0,
+                    (sum, item) => sum + ((item['quantity'] as int) * (item['price'] as int)),
+              );
+              return InkWell(
+                onTap: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (_)=> OrderDetailsScreen(cart: state.cart)),
+                );
+              },
+                child: Container(
+                  color: Colors.deepOrange,
+                  padding: EdgeInsets.all(16),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text("$totalItems items | ₹$totalCost",
+                          style: TextStyle(color: Colors.white, fontSize: 16)),
+                      Text("View Order", style: TextStyle(color: Colors.white,fontSize: 16, fontWeight: FontWeight.bold))
+                    ],
+                  ),
+                ),
+              );
+            }),
+      );
   }
 }
 
 class OrderDetailsScreen extends StatefulWidget {
   final Map<String, Map<String, dynamic>> cart;
-  OrderDetailsScreen({super.key, required this.cart});
+  const OrderDetailsScreen({super.key, required this.cart});
 
   @override
   State<OrderDetailsScreen> createState() => _OrderDetailsScreenState();
@@ -318,6 +326,8 @@ class OrderDetailsScreen extends StatefulWidget {
 
 class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
   void updateQuantity(String name, int change) {
+
+    context.read<CartBloc>().add(UpdateQuantityEvent(name, change));
     setState(() {
       if (widget.cart.containsKey(name)) {
         widget.cart[name]!['quantity'] += change;
@@ -337,28 +347,38 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text("Order Details")),
-      body: ListView(
-        children: widget.cart.values.map((item) {
-          return ListTile(
-            title: Text(item['name']),
-            subtitle: Text("₹${item['price']}"),
-            trailing: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                IconButton(
-                    onPressed: () => updateQuantity(item['name'], -1),
-                    icon: Icon(Icons.remove)),
-                Text(item['quantity'].toString()),
-                IconButton(
-                    onPressed: () => updateQuantity(item['name'], 1),
-                    icon: Icon(Icons.add)),
-              ],
-            ),
+      body: BlocBuilder<CartBloc, CartState>(
+        builder: (context, state) {
+          return ListView(
+            children: state.cart.values.map((item) {
+              return ListTile(
+                title: Text(item['name']),
+                subtitle: Text("₹${item['price']}"),
+                trailing: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    IconButton(
+                      onPressed: () =>
+                          context.read<CartBloc>().add(UpdateQuantityEvent(item['name'], -1)),
+                      icon: Icon(Icons.remove),
+                    ),
+                    Text(item['quantity'].toString()),
+                    IconButton(
+                      onPressed: () =>
+                          context.read<CartBloc>().add(UpdateQuantityEvent(item['name'], 1)),
+                      icon: Icon(Icons.add),
+                    ),
+                  ],
+                ),
+              );
+            }).toList(),
           );
-        }).toList(),
+        },
       ),
+
       bottomNavigationBar: InkWell(
         onTap: () {
+          context.read<CartBloc>().add(ClearCartEvent());
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(builder: (_) => ConfirmScreen()),
