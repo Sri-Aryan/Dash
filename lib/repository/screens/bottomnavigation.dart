@@ -35,16 +35,12 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
         index: currentIndex,
         children: pages,
       ),
-      // Always show navigation bar with cart bar above when needed
       bottomNavigationBar: BlocBuilder<CartBloc, CartState>(
         builder: (context, state) {
           return Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              // Cart bar (show above navigation when items are present)
               if (state.totalCost > 0) _buildCartBar(context, state, theme),
-
-              // Navigation bar (always visible)
               _buildBottomNavigation(context, theme),
             ],
           );
@@ -176,7 +172,7 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
           });
         },
         backgroundColor: theme.colorScheme.surface,
-        selectedItemColor: Colors.deepOrange, // Changed to match your theme
+        selectedItemColor: Colors.deepOrange,
         unselectedItemColor: theme.colorScheme.onSurfaceVariant,
         selectedLabelStyle: theme.textTheme.bodySmall?.copyWith(
           fontWeight: FontWeight.w600,

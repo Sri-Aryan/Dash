@@ -220,7 +220,6 @@ class _ConfirmScreenState extends State<ConfirmScreen>
                       width: double.infinity,
                       child: FilledButton.icon(
                         onPressed: () {
-                          // Navigate to order tracking
                           _navigateToHome();
                         },
                         style: FilledButton.styleFrom(
@@ -241,8 +240,6 @@ class _ConfirmScreenState extends State<ConfirmScreen>
                     ),
 
                     const SizedBox(height: 12),
-
-                    // Continue Shopping Button
                     SizedBox(
                       width: double.infinity,
                       child: OutlinedButton.icon(
@@ -268,7 +265,6 @@ class _ConfirmScreenState extends State<ConfirmScreen>
 
                     const SizedBox(height: 16),
 
-                    // Auto-redirect indicator
                     Container(
                       padding: const EdgeInsets.symmetric(
                         horizontal: 16,
