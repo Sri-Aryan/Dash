@@ -4,6 +4,7 @@ import 'package:dash/repository/cart/cart_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../widgets/uihelper.dart';
+import 'orderscreen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -313,103 +314,5 @@ class _HomeScreenState extends State<HomeScreen> {
               );
             }),
       );
-  }
-}
-
-class OrderDetailsScreen extends StatefulWidget {
-  final Map<String, Map<String, dynamic>> cart;
-  const OrderDetailsScreen({super.key, required this.cart});
-
-  @override
-  State<OrderDetailsScreen> createState() => _OrderDetailsScreenState();
-}
-
-class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
-  void updateQuantity(String name, int change) {
-
-    context.read<CartBloc>().add(UpdateQuantityEvent(name, change));
-    setState(() {
-      if (widget.cart.containsKey(name)) {
-        widget.cart[name]!['quantity'] += change;
-        if (widget.cart[name]!['quantity'] <= 0) {
-          widget.cart.remove(name);
-        }
-      }
-    });
-  }
-
-  int get totalCost => widget.cart.values.fold(
-      0,
-          (sum, item) =>
-      sum + ((item['quantity'] as int) * (item['price'] as int)));
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text("Order Details")),
-      body: BlocBuilder<CartBloc, CartState>(
-        builder: (context, state) {
-          return ListView(
-            children: state.cart.values.map((item) {
-              return ListTile(
-                title: Text(item['name']),
-                subtitle: Text("₹${item['price']}"),
-                trailing: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    IconButton(
-                      onPressed: () =>
-                          context.read<CartBloc>().add(UpdateQuantityEvent(item['name'], -1)),
-                      icon: Icon(Icons.remove),
-                    ),
-                    Text(item['quantity'].toString()),
-                    IconButton(
-                      onPressed: () =>
-                          context.read<CartBloc>().add(UpdateQuantityEvent(item['name'], 1)),
-                      icon: Icon(Icons.add),
-                    ),
-                  ],
-                ),
-              );
-            }).toList(),
-          );
-        },
-      ),
-
-      bottomNavigationBar: InkWell(
-        onTap: () {
-          context.read<CartBloc>().add(ClearCartEvent());
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (_) => ConfirmScreen()),
-          );
-        },
-        child: Container(
-          color: Colors.deepOrange,
-          padding: EdgeInsets.all(16),
-          child: Text("Confirm Order (₹$totalCost)",
-              style: TextStyle(color: Colors.white, fontSize: 16),
-              textAlign: TextAlign.center),
-        ),
-      ),
-    );
-  }
-}
-
-class ConfirmScreen extends StatelessWidget {
-  const ConfirmScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    Future.delayed(Duration(seconds: 2), () {
-      Navigator.popUntil(context, (route) => route.isFirst);
-    });
-    return Scaffold(
-      body: Center(
-        child: Text("✅ Order Confirmed!",
-            style: TextStyle(
-                fontSize: 22, fontWeight: FontWeight.bold, color: Colors.green)),
-      ),
-    );
   }
 }
