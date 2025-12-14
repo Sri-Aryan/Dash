@@ -1,10 +1,10 @@
-# 🚀 Dash Delivery App
+# Dash Delivery App
 
 A Flutter application for managing delivery services with **Firebase Authentication**, **REST API integration (JSONPlaceholder demo)**, and **BLoC state management**.
 
 ---
 
-## 📸 Screenshots
+## Screenshots
 
 <img width="400"  alt="Screenshot_1" src="https://github.com/user-attachments/assets/1b997fcc-9e34-4070-901b-bc1f06b004c3" />
 
@@ -34,20 +34,21 @@ A Flutter application for managing delivery services with **Firebase Authenticat
 
 ## 🛠️ Tech Stack
 
-- **Flutter** (Dart)  
+- **Flutter**  
 - **Firebase Auth**  
-- **BLoC (flutter_bloc)**  
-- **REST API** (`http` package)  
+- **BLoC**  
+- **REST API** 
 - **Material Design**  
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
-### 1️⃣ Clone this repo
+### Clone this repo
 ```bash
 git clone https://github.com/your-username/dash_delivery_app.git
 cd dash_delivery_app
+
 
 
 
